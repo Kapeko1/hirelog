@@ -42,12 +42,6 @@ class ApplicationStatusChart extends ChartWidget
                 ApplicationStatus::Ghosted => '#6B7280',
             };
 
-            /**
-             * @var object{status: ApplicationStatus, count: int} $item
-             */
-            $labels[] = $statusEnum;
-            $colors[] = '#CCCCCC';
-
             $data[] = $item->count;
         }
 
