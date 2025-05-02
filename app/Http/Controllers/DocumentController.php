@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
+    /**
+     * @param Document $document
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function download(Document $document)
     {
         if ($document->documentable_type !== \App\Models\WorkApplication::class ||

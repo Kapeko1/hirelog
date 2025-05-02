@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property string $documentable_type
+ * @property-read WorkApplication|null $documentable
+ */
 class Document extends Model
 {
     use HasFactory;

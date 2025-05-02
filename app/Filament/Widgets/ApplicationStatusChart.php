@@ -11,7 +11,8 @@ class ApplicationStatusChart extends ChartWidget
 {
     protected static ?string $heading = 'Aplikacje wg Statusu';
     protected static ?string $maxHeight = '300px';
-    protected int | string | array $columnSpan = 1;
+    protected int|string|array $columnSpan = 1;
+
 
     protected function getData(): array
     {
@@ -28,23 +29,25 @@ class ApplicationStatusChart extends ChartWidget
         foreach ($statusesData as $item) {
             $statusEnum = $item->status;
 
-            if ($statusEnum instanceof ApplicationStatus) {
-                $labels[] = $statusEnum->getLabel();
 
-                $colors[] = match ($statusEnum) {
-                    ApplicationStatus::Applied => '#9CA3AF',
-                    ApplicationStatus::Verification => '#60A5FA',
-                    ApplicationStatus::Interview => '#FBBF24',
-                    ApplicationStatus::Offer => '#34D399',
-                    ApplicationStatus::Hired => '#10B981',
-                    ApplicationStatus::Rejected => '#F87171',
-                    ApplicationStatus::Ghosted => '#6B7280',
-                    default => '#CCCCCC',
-                };
-            } else {
-                $labels[] = (string) $statusEnum;
-                $colors[] = '#CCCCCC';
-            }
+            $labels[] = $statusEnum->getLabel();
+
+            $colors[] = match ($statusEnum) {
+                ApplicationStatus::Applied => '#9CA3AF',
+                ApplicationStatus::Verification => '#60A5FA',
+                ApplicationStatus::Interview => '#FBBF24',
+                ApplicationStatus::Offer => '#34D399',
+                ApplicationStatus::Hired => '#10B981',
+                ApplicationStatus::Rejected => '#F87171',
+                ApplicationStatus::Ghosted => '#6B7280',
+            };
+
+            /**
+             * @var object{status: ApplicationStatus, count: int} $item
+             */
+            $labels[] = $statusEnum;
+            $colors[] = '#CCCCCC';
+
             $data[] = $item->count;
         }
 
@@ -64,6 +67,7 @@ class ApplicationStatusChart extends ChartWidget
     {
         return 'pie';
     }
+
     protected static ?array $options = [
         'scales' => [
             'x' => [
