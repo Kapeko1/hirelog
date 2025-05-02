@@ -86,7 +86,8 @@ class WorkApplicationResource extends Resource
                 Tables\Columns\TextColumn::make('application_date')
                     ->label('Data złożenia')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
                     ->badge()
