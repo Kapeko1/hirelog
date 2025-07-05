@@ -8,6 +8,3 @@ Route::get('/documents/{document}/download', [DocumentController::class, 'downlo
     ->middleware(['auth'])
     ->name('documents.download');
 
-Route::get('/', function () {
-    return redirect('/admin');
-});
