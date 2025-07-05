@@ -31,6 +31,11 @@ class WorkApplicationResource extends Resource
         return __('Aplikacje');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('Aplikacje');
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

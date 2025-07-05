@@ -37,10 +37,10 @@ class ListWorkApplications extends ListRecords
             'offer' => Tab::make('Oferta')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Offer)),
-            'positive' => Tab::make('Pozytywne')
+            'positive' => Tab::make('Zatrudniono')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Hired)),
-            'negative' => Tab::make('Negatywne')
+            'negative' => Tab::make('Ghosting/Odrzucono')
                 ->modifyQueryUsing(fn (Builder $query) =>
                 $query->whereIn('status', [
                     ApplicationStatus::Rejected,
