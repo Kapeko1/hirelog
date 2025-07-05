@@ -13,7 +13,10 @@ enum ApplicationStatus: string implements HasLabel
     case Hired = 'Hired';
     case Ghosted = 'Ghosted';
 
-    public function getLabel(): ?string
+    /**
+     * @return string
+     */
+    public function getLabel(): string
     {
         return match ($this) {
             self::Applied => 'Złożono',

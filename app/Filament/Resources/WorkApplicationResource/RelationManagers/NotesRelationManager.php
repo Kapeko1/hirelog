@@ -30,7 +30,7 @@ class NotesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('content')
+            ->recordTitle('notatkę')
             ->columns([
                 Tables\Columns\TextColumn::make('content')
                     ->label('Treść')

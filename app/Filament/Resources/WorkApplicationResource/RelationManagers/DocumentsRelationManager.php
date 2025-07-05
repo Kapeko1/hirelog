@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Document;
 
 class DocumentsRelationManager extends RelationManager
 {
@@ -42,6 +43,10 @@ class DocumentsRelationManager extends RelationManager
             ]);
     }
 
+    /**
+     * @param Table $table
+     * @return Table
+     */
     public function table(Table $table): Table
     {
         return $table
@@ -70,7 +75,7 @@ class DocumentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('download')
                     ->label('Pobierz')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->url(fn (Model $record): string => route('documents.download', ['document' => $record->id]))
+                    ->url(fn (Document $document): string => route('documents.download', ['document' => $document->id]))
                     ->openUrlInNewTab(),
             ])
             ->bulkActions([
