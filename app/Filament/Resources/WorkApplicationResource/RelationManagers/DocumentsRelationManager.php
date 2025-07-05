@@ -30,7 +30,8 @@ class DocumentsRelationManager extends RelationManager
                     ->disk('local')
                     ->visibility('private')
                     ->maxSize(10240)
-                    ->helperText('Maksymalny rozmiar wynosi 10Mb'),
+                    ->helperText('Maksymalny rozmiar wynosi 10Mb')
+                    ->storeFileNamesIn('file_name'),
 
                 Forms\Components\TextInput::make('description')
                     ->label('Opis')
