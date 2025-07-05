@@ -84,7 +84,7 @@ class DocumentResource extends Resource
                         if ($record->file_path && file_exists(storage_path('app/private/' .
                                 $record->file_path))) {
                             return number_format(filesize(storage_path('app/private/' .
-                                        $record->file_path)) / 1024, 2) . ' KB';
+                                        $record->file_path)) / 1024 / 1024, 2) . ' MB';
                         }
                         return 'Nieznany';
                     })
