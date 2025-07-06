@@ -2,25 +2,24 @@
 
 namespace App\Filament\Pages\Auth;
 
-use Filament\Pages\Auth\Register as BaseRegister;
-use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
 use App\Models\InvitationCode;
 use App\Rules\ValidInvitationCode;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Pages\Auth\Register as BaseRegister;
 
 class Register extends BaseRegister
 {
-
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('invitation_code')
-                    ->label('Kod zaproszenia')
+                    ->label(__('app.invitation_code'))
                     ->required()
                     ->rules([
                         'required',
-                        new ValidInvitationCode(),
+                        new ValidInvitationCode,
                     ]),
                 $this->getNameFormComponent(),
                 $this->getEmailFormComponent(),
@@ -36,9 +35,9 @@ class Register extends BaseRegister
 
         $invitationCode = InvitationCode::findByCode($invitationCodeValue);
 
-        if (!$invitationCode || !$invitationCode->isAvailable()) {
+        if (! $invitationCode || ! $invitationCode->isAvailable()) {
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'invitation_code' => 'Wrong or used code'
+                'invitation_code' => 'Wrong or used code',
             ]);
         }
 
@@ -47,5 +46,4 @@ class Register extends BaseRegister
 
         return $user;
     }
-
 }

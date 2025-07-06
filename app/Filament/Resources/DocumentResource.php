@@ -15,17 +15,21 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentResource extends Resource
 {
     protected static ?string $model = Document::class;
+
     protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
     public static function getNavigationLabel(): string
     {
-        return __('Dokumenty');
+        return __('app.documents');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Dokumenty');
+        return __('app.documents');
     }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -45,8 +49,8 @@ class DocumentResource extends Resource
 
                 $totalSize = 0;
                 foreach ($documents as $document) {
-                    if ($document->file_path && file_exists(storage_path('app/private/' . $document->file_path))) {
-                        $totalSize += filesize(storage_path('app/private/' . $document->file_path));
+                    if ($document->file_path && file_exists(storage_path('app/private/'.$document->file_path))) {
+                        $totalSize += filesize(storage_path('app/private/'.$document->file_path));
                     }
                 }
 
@@ -57,33 +61,34 @@ class DocumentResource extends Resource
                 return new \Illuminate\Support\HtmlString(
                     '<div class="p-4 bg-gray-400 rounded-lg mb-4">
                         <p class="text-sm text-gray-700">
-                            <strong>Wykorzystane miejsce:</strong> ' . $usedMB . ' MB / ' . $maxMB . ' MB (' . $percentage . '%)
+                            <strong>'.__('app.used_space').'</strong> '.$usedMB.' MB / '.$maxMB.' MB ('.$percentage.'%)
                         </p>
                     </div>'
                 );
             })
             ->columns([
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Opis')
+                    ->label(__('app.description'))
                     ->searchable()
-                    ->placeholder('Brak opisu'),
+                    ->placeholder(__('app.no_description')),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Data dodania')
+                    ->label(__('app.date_added'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('documentable.company_name')
-                    ->label('Firma')
+                    ->label(__('app.company'))
                     ->searchable()
-                    ->placeholder('Brak firmy'),
+                    ->placeholder(__('app.no_company')),
                 Tables\Columns\TextColumn::make('file_size')
-                    ->label('Rozmiar')
+                    ->label(__('app.size'))
                     ->getStateUsing(function ($record) {
-                        if ($record->file_path && file_exists(storage_path('app/private/' .
+                        if ($record->file_path && file_exists(storage_path('app/private/'.
                                 $record->file_path))) {
-                            return number_format(filesize(storage_path('app/private/' .
-                                        $record->file_path)) / 1024 / 1024, 2) . ' MB';
+                            return number_format(filesize(storage_path('app/private/'.
+                                        $record->file_path)) / 1024 / 1024, 2).' MB';
                         }
-                        return 'Nieznany';
+
+                        return __('app.unknown_size');
                     })
                     ->sortable(false),
             ])
@@ -93,7 +98,7 @@ class DocumentResource extends Resource
             ->actions([
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('download')
-                    ->label('Pobierz')
+                    ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->url(fn (Model $record): string => route('documents.download', ['document' => $record->id]))
                     ->openUrlInNewTab(),

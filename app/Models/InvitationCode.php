@@ -11,14 +11,13 @@ class InvitationCode extends Model
         'code',
         'is_used',
         'user_id',
-        'used_at'
+        'used_at',
     ];
 
     protected $casts = [
         'is_used' => 'boolean',
-        'used_at' => 'datetime'
+        'used_at' => 'datetime',
     ];
-
 
     public function user(): BelongsTo
     {
@@ -30,12 +29,13 @@ class InvitationCode extends Model
         return $this->update([
             'is_used' => true,
             'user_id' => $userId,
-            'used_at' => now()
-            ]);
+            'used_at' => now(),
+        ]);
     }
+
     public function isAvailable(): bool
     {
-        return !$this->is_used;
+        return ! $this->is_used;
     }
 
     public static function findByCode(string $code): ?self

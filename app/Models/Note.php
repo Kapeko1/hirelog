@@ -15,10 +15,8 @@ class Note extends Model
         'content',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function workApplication(): BelongsTo    {
+    public function workApplication(): BelongsTo
+    {
         return $this->belongsTo(WorkApplication::class);
     }
 }

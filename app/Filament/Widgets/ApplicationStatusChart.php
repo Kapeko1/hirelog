@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicationStatusChart extends ChartWidget
 {
-    protected static ?string $heading = 'Aplikacje wg Statusu';
-    protected static ?string $maxHeight = '300px';
-    protected int|string|array $columnSpan = 1;
+    protected static ?string $heading = null;
 
+    public function getHeading(): string
+    {
+        return __('app.applications_by_status');
+    }
+
+    protected static ?string $maxHeight = '300px';
+
+    protected int|string|array $columnSpan = 1;
 
     protected function getData(): array
     {
@@ -28,7 +34,6 @@ class ApplicationStatusChart extends ChartWidget
 
         foreach ($statusesData as $item) {
             $statusEnum = $item->status;
-
 
             $labels[] = $statusEnum->getLabel();
 
@@ -48,7 +53,7 @@ class ApplicationStatusChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Aplikacje',
+                    'label' => __('app.applications'),
                     'data' => $data,
                     'backgroundColor' => $colors,
                 ],

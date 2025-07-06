@@ -23,10 +23,8 @@ class Document extends Model
         'file_name',
     ];
 
-    /**
-     * @return MorphTo
-     */
-    public function documentable(): morphTo {
+    public function documentable(): morphTo
+    {
         return $this->morphTo();
     }
 

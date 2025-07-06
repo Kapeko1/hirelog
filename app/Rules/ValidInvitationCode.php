@@ -16,10 +16,10 @@ class ValidInvitationCode implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $code = InvitationCode::findByCode($value);
-        
-        if (!$code) {
+
+        if (! $code) {
             $fail('Podany kod zaproszenia nie istnieje.');
-        } elseif (!$code->isAvailable()) {
+        } elseif (! $code->isAvailable()) {
             $fail('Ten kod zaproszenia został już wykorzystany.');
         }
     }

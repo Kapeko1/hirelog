@@ -32,36 +32,39 @@ class CleanupOrphanedDocuments extends Command
         $dryRun = $this->option('dry-run');
 
         $storageFiles = $this->getAllStorageFiles();
-        $this->info('Found ' . count($storageFiles) . ' files in storage');
+        $this->info('Found '.count($storageFiles).' files in storage');
 
         $databaseFiles = Document::whereNotNull('file_path')->pluck('file_path')->toArray();
-        $this->info('Found ' . count($databaseFiles) . ' files in database');
+        $this->info('Found '.count($databaseFiles).' files in database');
 
         $orphanedFiles = array_diff($storageFiles, $databaseFiles);
 
         if (empty($orphanedFiles)) {
             $this->info('No orphaned files found!');
+
             return 0;
         }
 
-        $this->warn('Found ' . count($orphanedFiles) . ' orphaned files:');
+        $this->warn('Found '.count($orphanedFiles).' orphaned files:');
 
         $totalSize = 0;
         foreach ($orphanedFiles as $file) {
             $size = Storage::disk('local')->size($file);
             $totalSize += $size;
-            $this->line("  - {$file} (" . $this->formatBytes($size) . ")");
+            $this->line("  - {$file} (".$this->formatBytes($size).')');
         }
 
-        $this->info('Total size to be freed: ' . $this->formatBytes($totalSize));
+        $this->info('Total size to be freed: '.$this->formatBytes($totalSize));
 
         if ($dryRun) {
             $this->info('DRY RUN: No files were deleted. Run without --dry-run to actually delete files.');
+
             return 0;
         }
 
-        if (!$this->confirm('Do you want to delete these orphaned files?')) {
+        if (! $this->confirm('Do you want to delete these orphaned files?')) {
             $this->info('Operation cancelled.');
+
             return 0;
         }
 
@@ -79,11 +82,11 @@ class CleanupOrphanedDocuments extends Command
                     $this->error("Failed to delete: {$file}");
                 }
             } catch (\Exception $e) {
-                $this->error("Error deleting {$file}: " . $e->getMessage());
+                $this->error("Error deleting {$file}: ".$e->getMessage());
             }
         }
 
-        $this->info("Cleanup complete! Deleted {$deletedCount} files, freed " . $this->formatBytes($deletedSize));
+        $this->info("Cleanup complete! Deleted {$deletedCount} files, freed ".$this->formatBytes($deletedSize));
 
         return 0;
     }
@@ -111,6 +114,6 @@ class CleanupOrphanedDocuments extends Command
             $bytes /= 1024;
         }
 
-        return round($bytes, $precision) . ' ' . $units[$i];
+        return round($bytes, $precision).' '.$units[$i];
     }
 }

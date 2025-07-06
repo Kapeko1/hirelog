@@ -48,9 +48,11 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
         ];
     }
+
     public function canAccessPanel(Panel $panel): bool
     {
-        Log::info('canAccessPanel called for user: ' . $this->email);
+        Log::info('canAccessPanel called for user: '.$this->email);
+
         return true;
     }
 }
