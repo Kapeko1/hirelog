@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\WorkApplicationResource\RelationManagers;
 
+use App\Rules\UserStorageQuotaRule;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -25,14 +26,15 @@ class DocumentsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\FileUpload::make('file_path')
                     ->label('Plik PDF')
-                    ->nullable()
                     ->acceptedFileTypes(['application/pdf'])
                     ->directory('work-application-documents/' . date('Y/m'))
                     ->disk('local')
                     ->visibility('private')
-                    ->maxSize(10240)
-                    ->helperText('Maksymalny rozmiar wynosi 10Mb')
-                    ->storeFileNamesIn('file_name'),
+                    ->maxSize(2048)
+                    ->helperText('Maksymalny rozmiar wynosi 2Mb')
+                    ->storeFileNamesIn('file_name')
+                    ->rules([new UserStorageQuotaRule()])
+                    ->required(),
 
                 Forms\Components\TextInput::make('description')
                     ->label('Opis')
