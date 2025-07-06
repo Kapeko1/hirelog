@@ -23,7 +23,10 @@ class NotesRelationManager extends RelationManager
                 RichEditor::make('content')
                 ->label('Treść notatki')
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->maxLength(60000)
+                    ->helperText('Maksymalnie 60,000 znaków'),
+
             ]);
     }
 
