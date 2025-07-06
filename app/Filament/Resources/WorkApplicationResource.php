@@ -16,7 +16,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WorkApplicationResource extends Resource
 {
@@ -24,16 +23,17 @@ class WorkApplicationResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('Aplikacje');
+        return __('app.applications');
     }
+
     public static function getPluralModelLabel(): string
     {
-        return __('Aplikacje');
+        return __('app.applications');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Aplikacje');
+        return __('app.applications');
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -45,31 +45,31 @@ class WorkApplicationResource extends Resource
                 TextInput::make('job_name')
                     ->required()
                     ->maxLength(255)
-                    ->label('Nazwa stanowiska'),
+                    ->label(__('app.job_name')),
 
                 TextInput::make('company_name')
                     ->required()
                     ->maxLength(255)
-                    ->label('Nazwa firmy'),
+                    ->label(__('app.company_name')),
 
                 DateTimePicker::make('application_date')
                     ->required()
-                    ->label('Data złożenia aplikacji')
+                    ->label(__('app.application_date'))
                     ->default(now()),
 
                 Select::make('status')
                     ->options(ApplicationStatus::class)
                     ->required()
-                    ->label('Status')
+                    ->label(__('app.status'))
                     ->default(ApplicationStatus::Applied),
 
                 TextArea::make('job_url')
                     ->nullable()
                     ->maxLength(255)
-                    ->label('Link do ogłoszenia'),
+                    ->label(__('app.job_url')),
 
                 Forms\Components\TextInput::make('location')
-                    ->label('Lokalizacja')
+                    ->label(__('app.location'))
                     ->nullable()
                     ->maxLength(255),
 
@@ -81,22 +81,22 @@ class WorkApplicationResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('job_name')
-                    ->label('Stanowisko')
+                    ->label(__('app.position'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('company_name')
-                    ->label('Firma')
+                    ->label(__('app.company'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('application_date')
-                    ->label('Data złożenia')
+                    ->label(__('app.date_submitted'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
+                    ->label(__('app.status'))
                     ->badge()
-                    ->color(fn (ApplicationStatus $state):string =>match ($state) {
+                    ->color(fn (ApplicationStatus $state): string => match ($state) {
                         ApplicationStatus::Applied => 'gray',
                         ApplicationStatus::Verification => 'info',
                         ApplicationStatus::Interview => 'warning',
@@ -108,10 +108,10 @@ class WorkApplicationResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('location')
-                    ->label('Lokalizacja')
+                    ->label(__('app.location'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dodano')
+                    ->label(__('app.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

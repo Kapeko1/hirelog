@@ -2,13 +2,12 @@
 
 namespace App\Filament\Resources\WorkApplicationResource\Pages;
 
+use App\Enums\ApplicationStatus;
 use App\Filament\Resources\WorkApplicationResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Components\Tab;
-use App\Enums\ApplicationStatus;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
-
 
 class ListWorkApplications extends ListRecords
 {
@@ -24,27 +23,26 @@ class ListWorkApplications extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make('Wszystkie'),
-            'applied' => Tab::make('Złożono')
+            'all' => Tab::make(__('app.all')),
+            'applied' => Tab::make(__('app.applied'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Applied)),
-            'verification' => Tab::make('Weryfikacja')
+            'verification' => Tab::make(__('app.verification'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Verification)),
-            'interview' => Tab::make('Rozmowa')
+            'interview' => Tab::make(__('app.interview'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Interview)),
-            'offer' => Tab::make('Oferta')
+            'offer' => Tab::make(__('app.offer'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Offer)),
-            'positive' => Tab::make('Zatrudniono')
+            'positive' => Tab::make(__('app.hired'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status',
                     ApplicationStatus::Hired)),
-            'negative' => Tab::make('Ghosting/Odrzucono')
-                ->modifyQueryUsing(fn (Builder $query) =>
-                $query->whereIn('status', [
+            'negative' => Tab::make(__('app.ghosted_rejected'))
+                ->modifyQueryUsing(fn (Builder $query) => $query->whereIn('status', [
                     ApplicationStatus::Rejected,
-                    ApplicationStatus::Ghosted
+                    ApplicationStatus::Ghosted,
                 ])),
         ];
     }

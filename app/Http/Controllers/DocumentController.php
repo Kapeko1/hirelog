@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
     /**
-     * @param Document $document
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function download(Document $document)
@@ -19,7 +17,7 @@ class DocumentController extends Controller
             abort(403, 'Brak dostępu do tego dokumentu.');
         }
 
-        if (!Storage::disk('local')->exists($document->file_path)) {
+        if (! Storage::disk('local')->exists($document->file_path)) {
             abort(404, 'Plik nie znaleziony.');
         }
 

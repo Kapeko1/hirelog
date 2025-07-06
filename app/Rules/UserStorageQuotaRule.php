@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Storage;
 class UserStorageQuotaRule implements ValidationRule
 {
     public int $maxQuotaBytes;
+
     public function __construct(int $maxQuotaMB = 15)
     {
         $this->maxQuotaBytes = $maxQuotaMB * 1024 * 1024;
     }
-
 
     /**
      * Run the validation rule.
@@ -23,10 +23,14 @@ class UserStorageQuotaRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!$value) return;
+        if (! $value) {
+            return;
+        }
 
         $user = auth()->user();
-        if (!$user) return;
+        if (! $user) {
+            return;
+        }
 
         $currentUsage = Document::whereHas('documentable', function ($query) use ($user) {
             $query->where('user_id', $user->id);

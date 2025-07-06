@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-
+use App\Enums\ApplicationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use App\Models\Note;
-use App\Enums\ApplicationStatus;
+
 class WorkApplication extends Model
 {
     use HasFactory;
@@ -21,7 +20,7 @@ class WorkApplication extends Model
         'application_date',
         'status',
         'job_url',
-        'location'
+        'location',
     ];
 
     protected $casts = [
@@ -29,7 +28,8 @@ class WorkApplication extends Model
         'status' => ApplicationStatus::class,
     ];
 
-    public function user(): BelongsTo   {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
@@ -38,7 +38,8 @@ class WorkApplication extends Model
         return $this->morphMany(Document::class, 'documentable');
     }
 
-    public function notes(): HasMany    {
+    public function notes(): HasMany
+    {
         return $this->hasMany(Note::class);
     }
 }

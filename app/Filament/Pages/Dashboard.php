@@ -5,9 +5,7 @@ namespace App\Filament\Pages;
 use App\Filament\Widgets\ApplicationStats;
 use App\Filament\Widgets\ApplicationStatusChart;
 use App\Filament\Widgets\CustomAccountWidget;
-use Filament\Pages\Page;
 use Filament\Pages\Dashboard as BaseDashboard;
-use Filament\Widgets\AccountWidget;
 
 class Dashboard extends BaseDashboard
 {
@@ -23,9 +21,9 @@ class Dashboard extends BaseDashboard
             CustomAccountWidget::class,
         ];
     }
-    public function getHeaderWidgetsColumns(): int | array
+
+    public function getHeaderWidgetsColumns(): int|array
     {
         return 3;
     }
-
 }

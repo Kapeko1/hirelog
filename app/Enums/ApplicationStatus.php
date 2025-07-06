@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Enums;
+
 use Filament\Support\Contracts\HasLabel;
 
 enum ApplicationStatus: string implements HasLabel
@@ -13,19 +14,16 @@ enum ApplicationStatus: string implements HasLabel
     case Hired = 'Hired';
     case Ghosted = 'Ghosted';
 
-    /**
-     * @return string
-     */
     public function getLabel(): string
     {
         return match ($this) {
-            self::Applied => 'Złożono',
-            self::Verification => 'Weryfikacja',
-            self::Interview => 'Rozmowa kwalifikacyjna',
-            self::Offer => 'Oferta',
-            self::Rejected => 'Odrzucono',
-            self::Hired => 'Zatrudniono',
-            self::Ghosted => 'Ghosting :(',
+            self::Applied => __('statuses.applied'),
+            self::Verification => __('statuses.verification'),
+            self::Interview => __('statuses.interview'),
+            self::Offer => __('statuses.offer'),
+            self::Rejected => __('statuses.rejected'),
+            self::Hired => __('statuses.hired'),
+            self::Ghosted => __('statuses.ghosted'),
         };
     }
 }

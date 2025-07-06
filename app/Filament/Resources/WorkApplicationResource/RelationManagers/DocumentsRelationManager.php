@@ -2,65 +2,63 @@
 
 namespace App\Filament\Resources\WorkApplicationResource\RelationManagers;
 
+use App\Models\Document;
 use App\Rules\UserStorageQuotaRule;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Document;
 
 class DocumentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'documents';
 
-    protected static ?string $title = 'Dokumenty';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('app.documents');
+    }
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('file_path')
-                    ->label('Plik PDF')
+                    ->label(__('app.pdf_file'))
                     ->acceptedFileTypes(['application/pdf'])
-                    ->directory('work-application-documents/' . date('Y/m'))
+                    ->directory('work-application-documents/'.date('Y/m'))
                     ->disk('local')
                     ->visibility('private')
                     ->maxSize(2048)
-                    ->helperText('Maksymalny rozmiar wynosi 2Mb')
+                    ->helperText(__('app.max_file_size'))
                     ->storeFileNamesIn('file_name')
-                    ->rules([new UserStorageQuotaRule()])
+                    ->rules([new UserStorageQuotaRule])
                     ->required(),
 
                 Forms\Components\TextInput::make('description')
-                    ->label('Opis')
-                    ->placeholder('Np. CV, List Motywacyjny, Portfolio')
+                    ->label(__('app.description'))
+                    ->placeholder(__('app.description_placeholder'))
                     ->nullable()
                     ->maxLength(255),
 
             ]);
     }
 
-    /**
-     * @param Table $table
-     * @return Table
-     */
     public function table(Table $table): Table
     {
         return $table
             ->recordTitleAttribute('description')
             ->columns([
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Opis')
+                    ->label(__('app.description'))
                     ->searchable()
-                    ->placeholder('Brak opisu'),
+                    ->placeholder(__('app.no_description')),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Data dodania')
+                    ->label(__('app.date_added'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable(),
             ])
@@ -69,13 +67,13 @@ class DocumentsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->label('Dodaj nowy dokument'),
+                    ->label(__('app.add_new_document')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('download')
-                    ->label('Pobierz')
+                    ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->url(fn (Document $document): string => route('documents.download', ['document' => $document->id]))
                     ->openUrlInNewTab(),
