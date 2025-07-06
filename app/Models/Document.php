@@ -31,6 +31,20 @@ class Document extends Model
     }
 
     /**
+     * Boot the model and add model event listeners
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($document) {
+            if ($document->file_path && Storage::disk('local')->exists($document->file_path)) {
+                Storage::disk('local')->delete($document->file_path);
+            }
+        });
+    }
+
+    /**
      * @return string|null
      */
     public function getUrlAttribute()
