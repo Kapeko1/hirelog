@@ -42,7 +42,7 @@ class Register extends BaseRegister
         }
 
         $user = parent::handleRegistration($data);
-        $invitationCode->markAsUsed($user->id);
+        $invitationCode->markAsUsed($user->getKey());
 
         return $user;
     }

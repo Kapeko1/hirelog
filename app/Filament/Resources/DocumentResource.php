@@ -100,7 +100,7 @@ class DocumentResource extends Resource
                 Tables\Actions\Action::make('download')
                     ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->url(fn (Model $record): string => route('documents.download', ['document' => $record->id]))
+                    ->url(fn (Document $record): string => route('documents.download', ['document' => $record->getKey()]))
                     ->openUrlInNewTab(),
             ])
             ->bulkActions([]);

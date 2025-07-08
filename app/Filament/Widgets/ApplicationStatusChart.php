@@ -47,7 +47,7 @@ class ApplicationStatusChart extends ChartWidget
                 ApplicationStatus::Ghosted => '#6B7280',
             };
 
-            $data[] = $item->count;
+            $data[] = $item->getAttribute('count');
         }
 
         return [
