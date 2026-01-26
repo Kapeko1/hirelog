@@ -60,13 +60,115 @@ class DocumentResource extends Resource
                 $maxMB = 15;
                 $percentage = round(($totalSize / (15 * 1024 * 1024)) * 100, 1);
 
-                return new HtmlString(
-                    '<div class="p-4 bg-gray-400 rounded-lg mb-4">
-                        <p class="text-sm text-gray-700">
-                            <strong>'.__('app.used_space').'</strong> '.$usedMB.' MB / '.$maxMB.' MB ('.$percentage.'%)
-                        </p>
-                    </div>'
-                );
+                return new HtmlString('
+                    <div x-data="{
+                            width: 0,
+                            percentage: '.$percentage.',
+                            usedMB: '.$usedMB.',
+                            maxMB: '.$maxMB.',
+                            isDark: document.documentElement.classList.contains(\'dark\'),
+
+                            getBarColor() {
+                                if (this.percentage >= 90) return \'#ef4444\';
+                                if (this.percentage >= 70) return \'#eab308\';
+                                return \'#22c55e\';
+                            },
+
+                            updateFromDOM() {
+                                const dataEl = this.$el.querySelector(\'[data-storage-info]\');
+                                if (dataEl) {
+                                    const newPercentage = parseFloat(dataEl.dataset.percentage);
+                                    const newUsedMB = parseFloat(dataEl.dataset.usedmb);
+                                    const newMaxMB = parseFloat(dataEl.dataset.maxmb);
+
+                                    if (newPercentage !== this.percentage) {
+                                        this.percentage = newPercentage;
+                                        this.usedMB = newUsedMB;
+                                        this.maxMB = newMaxMB;
+
+                                        // Animate to new width
+                                        this.width = 0;
+                                        setTimeout(() => this.width = this.percentage, 50);
+                                    }
+                                }
+                            },
+
+                            init() {
+                                setTimeout(() => this.width = this.percentage, 100);
+
+                                // Dark mode observer
+                                const darkObserver = new MutationObserver(() => {
+                                    this.isDark = document.documentElement.classList.contains(\'dark\');
+                                });
+                                darkObserver.observe(document.documentElement, {
+                                    attributes: true,
+                                    attributeFilter: [\'class\']
+                                });
+
+                                // Storage data observer
+                                const storageObserver = new MutationObserver(() => {
+                                    this.updateFromDOM();
+                                });
+
+                                const dataEl = this.$el.querySelector(\'[data-storage-info]\');
+                                if (dataEl) {
+                                    storageObserver.observe(dataEl, {
+                                        attributes: true,
+                                        attributeFilter: [\'data-percentage\', \'data-usedmb\', \'data-maxmb\']
+                                    });
+                                }
+                            }
+                         }"
+                         :style="{
+                            background: isDark ? \'#1f2937\' : \'#ffffff\',
+                            borderRadius: \'12px\',
+                            padding: \'24px\',
+                            marginBottom: \'16px\',
+                            border: isDark ? \'1px solid #374151\' : \'1px solid #e5e7eb\',
+                            boxShadow: \'0 1px 2px 0 rgba(0, 0, 0, 0.05)\'
+                         }">
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <div>
+                                <h3 :style="{ fontSize: \'16px\', fontWeight: \'600\', margin: \'0\', color: isDark ? \'#ffffff\' : \'#171717\' }">
+                                    '.__('app.used_space').'
+                                </h3>
+                                <p :style="{ margin: \'4px 0 0 0\', fontSize: \'14px\', color: isDark ? \'#9ca3af\' : \'#525252\' }">
+                                    <span x-text="usedMB.toFixed(2)"></span> MB / <span x-text="maxMB"></span> MB
+                                </p>
+                            </div>
+                            <div :style="{ fontSize: \'20px\', fontWeight: \'700\', color: isDark ? \'#9ca3af\' : \'#525252\' }">
+                                <span x-text="width.toFixed(1) + \'%\'">'.$percentage.'%</span>
+                            </div>
+                        </div>
+
+                        <div :style="{
+                            position: \'relative\',
+                            height: \'12px\',
+                            width: \'100%\',
+                            overflow: \'hidden\',
+                            borderRadius: \'9999px\',
+                            backgroundColor: isDark ? \'#374151\' : \'#e5e7eb\'
+                         }">
+                            <div :style="{
+                                height: \'100%\',
+                                borderRadius: \'9999px\',
+                                transition: \'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)\',
+                                width: width + \'%\',
+                                backgroundColor: getBarColor(),
+                                minWidth: width > 0 ? \'4px\' : \'0\'
+                            }">
+                            </div>
+                        </div>
+
+                        <!-- Hidden element with data for observer -->
+                        <div data-storage-info
+                             data-percentage="'.$percentage.'"
+                             data-usedmb="'.$usedMB.'"
+                             data-maxmb="'.$maxMB.'"
+                             style="display: none;"></div>
+                    </div>
+                ');
             })
             ->columns([
                 TextColumn::make('description')
