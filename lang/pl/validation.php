@@ -161,7 +161,7 @@ return [
     'string' => 'The :attribute field must be a string.',
     'timezone' => 'The :attribute field must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The file failed to upload. File may be too large (maximum 8MB) or there was a network error.',
+    'uploaded' => 'Przesyłanie pliku nie powiodło się. Plik może być za duży (maksymalnie 8MB) lub wystąpił błąd sieci.',
     'uppercase' => 'The :attribute field must be uppercase.',
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
@@ -196,7 +196,7 @@ return [
     */
 
     'attributes' => [
-        'file_path' => 'PDF file',
+        'file_path' => 'plik PDF',
     ],
 
 ];

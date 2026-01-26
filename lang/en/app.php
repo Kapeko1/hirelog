@@ -56,8 +56,12 @@ return [
 
     // Helper texts
     'max_characters' => 'Maximum 60,000 characters',
-    'max_file_size' => 'Maximum file size is 2MB',
+    'max_file_size' => 'Maximum file size is 8MB',
     'used_space' => 'Used space:',
+
+    // Validation messages
+    'file_too_large' => 'The file is too large. Maximum allowed size is 8MB.',
+    'file_upload_failed' => 'The file upload failed. Please make sure the file does not exceed 8MB.',
 
     // Record titles
     'note_record' => 'note',

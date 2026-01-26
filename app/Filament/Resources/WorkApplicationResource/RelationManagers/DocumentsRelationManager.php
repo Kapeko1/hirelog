@@ -39,10 +39,17 @@ class DocumentsRelationManager extends RelationManager
                     ->directory('work-application-documents/'.date('Y/m'))
                     ->disk('local')
                     ->visibility('private')
-                    ->maxSize(2048)
+                    ->maxSize(8192)
                     ->helperText(__('app.max_file_size'))
                     ->storeFileNamesIn('file_name')
-                    ->rules([new UserStorageQuotaRule])
+                    ->rules([
+                        new UserStorageQuotaRule,
+                        'max:8192',
+                    ])
+                    ->validationMessages([
+                        'max' => __('app.file_too_large'),
+                        'required' => __('validation.required', ['attribute' => __('app.pdf_file')]),
+                    ])
                     ->required(),
 
                 TextInput::make('description')

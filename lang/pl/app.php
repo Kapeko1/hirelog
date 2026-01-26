@@ -56,8 +56,12 @@ return [
 
     // Helper texts
     'max_characters' => 'Maksymalnie 60,000 znaków',
-    'max_file_size' => 'Maksymalny rozmiar wynosi 2Mb',
+    'max_file_size' => 'Maksymalny rozmiar wynosi 8Mb',
     'used_space' => 'Wykorzystane miejsce:',
+
+    // Validation messages
+    'file_too_large' => 'Plik jest za duży. Maksymalny dozwolony rozmiar to 8MB.',
+    'file_upload_failed' => 'Przesyłanie pliku nie powiodło się. Upewnij się, że plik nie przekracza 8MB.',
 
     // Record titles
     'note_record' => 'notatkę',
