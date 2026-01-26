@@ -4,9 +4,9 @@ namespace App\Filament\Resources\WorkApplicationResource\Pages;
 
 use App\Enums\ApplicationStatus;
 use App\Filament\Resources\WorkApplicationResource;
-use Filament\Actions;
-use Filament\Resources\Components\Tab;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
 
 class ListWorkApplications extends ListRecords
@@ -16,7 +16,7 @@ class ListWorkApplications extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 

@@ -5,15 +5,16 @@ namespace App\Filament\Pages\Auth;
 use App\Models\InvitationCode;
 use App\Rules\ValidInvitationCode;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Pages\Auth\Register as BaseRegister;
+use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
-class Register extends BaseRegister
+class Register extends \Filament\Auth\Pages\Register
 {
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('invitation_code')
                     ->label(__('app.invitation_code'))
                     ->required()
@@ -28,7 +29,10 @@ class Register extends BaseRegister
             ]);
     }
 
-    protected function handleRegistration(array $data): \Illuminate\Database\Eloquent\Model
+    /**
+     * @throws ValidationException
+     */
+    protected function handleRegistration(array $data): Model
     {
         $invitationCodeValue = $data['invitation_code'];
         unset($data['invitation_code']);
@@ -36,7 +40,7 @@ class Register extends BaseRegister
         $invitationCode = InvitationCode::findByCode($invitationCodeValue);
 
         if (! $invitationCode || ! $invitationCode->isAvailable()) {
-            throw \Illuminate\Validation\ValidationException::withMessages([
+            throw ValidationException::withMessages([
                 'invitation_code' => 'Wrong or used code',
             ]);
         }

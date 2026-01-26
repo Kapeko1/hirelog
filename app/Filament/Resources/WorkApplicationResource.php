@@ -3,17 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Enums\ApplicationStatus;
-use App\Filament\Resources\WorkApplicationResource\Pages;
-use App\Filament\Resources\WorkApplicationResource\RelationManagers;
+use App\Filament\Resources\WorkApplicationResource\Pages\CreateWorkApplication;
+use App\Filament\Resources\WorkApplicationResource\Pages\EditWorkApplication;
+use App\Filament\Resources\WorkApplicationResource\Pages\ListWorkApplications;
+use App\Filament\Resources\WorkApplicationResource\RelationManagers\DocumentsRelationManager;
+use App\Filament\Resources\WorkApplicationResource\RelationManagers\NotesRelationManager;
 use App\Models\WorkApplication;
-use Filament\Forms;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -36,12 +42,12 @@ class WorkApplicationResource extends Resource
         return __('app.applications');
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('job_name')
                     ->required()
                     ->maxLength(255)
@@ -68,7 +74,7 @@ class WorkApplicationResource extends Resource
                     ->maxLength(255)
                     ->label(__('app.job_url')),
 
-                Forms\Components\TextInput::make('location')
+                TextInput::make('location')
                     ->label(__('app.location'))
                     ->nullable()
                     ->maxLength(255),
@@ -80,20 +86,20 @@ class WorkApplicationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('job_name')
+                TextColumn::make('job_name')
                     ->label(__('app.position'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('company_name')
+                TextColumn::make('company_name')
                     ->label(__('app.company'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('application_date')
+                TextColumn::make('application_date')
                     ->label(__('app.date_submitted'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('status')
                     ->label(__('app.status'))
                     ->badge()
                     ->color(fn (ApplicationStatus $state): string => match ($state) {
@@ -107,10 +113,10 @@ class WorkApplicationResource extends Resource
                     })
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('location')
+                TextColumn::make('location')
                     ->label(__('app.location'))
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('app.created_at'))
                     ->dateTime()
                     ->sortable()
@@ -119,13 +125,13 @@ class WorkApplicationResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -133,17 +139,17 @@ class WorkApplicationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\NotesRelationManager::class,
-            RelationManagers\DocumentsRelationManager::class,
+            NotesRelationManager::class,
+            DocumentsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListWorkApplications::route('/'),
-            'create' => Pages\CreateWorkApplication::route('/create'),
-            'edit' => Pages\EditWorkApplication::route('/{record}/edit'),
+            'index' => ListWorkApplications::route('/'),
+            'create' => CreateWorkApplication::route('/create'),
+            'edit' => EditWorkApplication::route('/{record}/edit'),
         ];
     }
 

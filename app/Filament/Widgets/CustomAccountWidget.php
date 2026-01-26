@@ -12,5 +12,5 @@ class CustomAccountWidget extends Widget
 
     protected static bool $isLazy = false;
 
-    protected static string $view = 'filament-panels::widgets.account-widget';
+    protected string $view = 'filament-panels::widgets.account-widget';
 }

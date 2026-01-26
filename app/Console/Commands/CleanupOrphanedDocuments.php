@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Document;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -81,7 +82,7 @@ class CleanupOrphanedDocuments extends Command
                 } else {
                     $this->error("Failed to delete: {$file}");
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->error("Error deleting {$file}: ".$e->getMessage());
             }
         }

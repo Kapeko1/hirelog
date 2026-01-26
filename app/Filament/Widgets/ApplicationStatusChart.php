@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicationStatusChart extends ChartWidget
 {
-    protected static ?string $heading = null;
+    protected ?string $heading = null;
 
     public function getHeading(): string
     {
         return __('app.applications_by_status');
     }
 
-    protected static ?string $maxHeight = '300px';
+    protected ?string $maxHeight = '300px';
 
     protected int|string|array $columnSpan = 1;
 
@@ -67,7 +67,7 @@ class ApplicationStatusChart extends ChartWidget
         return 'pie';
     }
 
-    protected static ?array $options = [
+    protected ?array $options = [
         'scales' => [
             'x' => [
                 'display' => false,

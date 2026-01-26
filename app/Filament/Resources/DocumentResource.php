@@ -2,15 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DocumentResource\Pages;
+use App\Filament\Resources\DocumentResource\Pages\ListDocuments;
 use App\Models\Document;
 use App\Models\WorkApplication;
-use Filament\Forms\Form;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 
 class DocumentResource extends Resource
 {
@@ -18,7 +20,7 @@ class DocumentResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
     public static function getNavigationLabel(): string
     {
@@ -30,10 +32,10 @@ class DocumentResource extends Resource
         return __('app.documents');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }
@@ -58,7 +60,7 @@ class DocumentResource extends Resource
                 $maxMB = 15;
                 $percentage = round(($totalSize / (15 * 1024 * 1024)) * 100, 1);
 
-                return new \Illuminate\Support\HtmlString(
+                return new HtmlString(
                     '<div class="p-4 bg-gray-400 rounded-lg mb-4">
                         <p class="text-sm text-gray-700">
                             <strong>'.__('app.used_space').'</strong> '.$usedMB.' MB / '.$maxMB.' MB ('.$percentage.'%)
@@ -67,19 +69,19 @@ class DocumentResource extends Resource
                 );
             })
             ->columns([
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label(__('app.description'))
                     ->searchable()
                     ->placeholder(__('app.no_description')),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('app.date_added'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('documentable.company_name')
+                TextColumn::make('documentable.company_name')
                     ->label(__('app.company'))
                     ->searchable()
                     ->placeholder(__('app.no_company')),
-                Tables\Columns\TextColumn::make('file_size')
+                TextColumn::make('file_size')
                     ->label(__('app.size'))
                     ->getStateUsing(function ($record) {
                         if ($record->file_path && file_exists(storage_path('app/private/'.
@@ -95,15 +97,15 @@ class DocumentResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\Action::make('download')
+            ->recordActions([
+                DeleteAction::make(),
+                Action::make('download')
                     ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->url(fn (Document $record): string => route('documents.download', ['document' => $record->getKey()]))
                     ->openUrlInNewTab(),
             ])
-            ->bulkActions([]);
+            ->toolbarActions([]);
     }
 
     public static function getRelations(): array
@@ -116,7 +118,7 @@ class DocumentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDocuments::route('/'),
+            'index' => ListDocuments::route('/'),
         ];
     }
 

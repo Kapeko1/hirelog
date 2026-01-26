@@ -4,10 +4,17 @@ namespace App\Filament\Resources\WorkApplicationResource\RelationManagers;
 
 use App\Models\Document;
 use App\Rules\UserStorageQuotaRule;
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,11 +29,11 @@ class DocumentsRelationManager extends RelationManager
         return __('app.documents');
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\FileUpload::make('file_path')
+        return $schema
+            ->components([
+                FileUpload::make('file_path')
                     ->label(__('app.pdf_file'))
                     ->acceptedFileTypes(['application/pdf'])
                     ->directory('work-application-documents/'.date('Y/m'))
@@ -38,7 +45,7 @@ class DocumentsRelationManager extends RelationManager
                     ->rules([new UserStorageQuotaRule])
                     ->required(),
 
-                Forms\Components\TextInput::make('description')
+                TextInput::make('description')
                     ->label(__('app.description'))
                     ->placeholder(__('app.description_placeholder'))
                     ->nullable()
@@ -52,12 +59,12 @@ class DocumentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label(__('app.description'))
                     ->searchable()
                     ->placeholder(__('app.no_description')),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('app.date_added'))
                     ->dateTime('Y-m-d H:i')
                     ->sortable(),
@@ -66,21 +73,21 @@ class DocumentsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                CreateAction::make()
                     ->label(__('app.add_new_document')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\Action::make('download')
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
+                Action::make('download')
                     ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->url(fn (Document $document): string => route('documents.download', ['document' => $document->id]))
                     ->openUrlInNewTab(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
