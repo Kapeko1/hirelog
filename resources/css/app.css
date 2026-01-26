@@ -4,6 +4,7 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../vendor/filament/**/*.blade.php';
 @source '../../vendor/bezhansalleh/filament-language-switch/resources/views/**/*.blade.php';
 
 @theme {
