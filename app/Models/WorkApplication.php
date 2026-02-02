@@ -42,4 +42,9 @@ class WorkApplication extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    public function statusHistories(): HasMany
+    {
+        return $this->hasMany(ApplicationStatusHistory::class);
+    }
 }
