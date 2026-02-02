@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\WorkApplicationResource\Widgets\ApplicationFlowSankeyChart;
 use App\Filament\Widgets\ApplicationStats;
 use App\Filament\Widgets\ApplicationStatusChart;
 use App\Filament\Widgets\CustomAccountWidget;
@@ -18,6 +19,7 @@ class Dashboard extends BaseDashboard
         return [
             ApplicationStatusChart::class,
             ApplicationStats::class,
+            ApplicationFlowSankeyChart::class,
             CustomAccountWidget::class,
         ];
     }
