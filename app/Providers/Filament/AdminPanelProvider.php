@@ -6,6 +6,7 @@ use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Widgets\ApplicationStats;
 use App\Filament\Widgets\ApplicationStatusChart;
+use Elemind\FilamentECharts\FilamentEChartsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -58,7 +59,8 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
-                FilamentApexChartsPlugin::make()
+                FilamentApexChartsPlugin::make(),
+                FilamentEChartsPlugin::make()
             ])
             ->authMiddleware([
                 Authenticate::class,
