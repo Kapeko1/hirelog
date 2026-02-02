@@ -53,6 +53,7 @@ return [
     'today' => ' Today',
     'last_7_days' => 'Last 7 Days',
     'applications_by_status' => 'Applications by Status',
+    'application_status_flow' => 'Application Status Flow',
 
     // Helper texts
     'max_characters' => 'Maximum 60,000 characters',

@@ -49,10 +49,11 @@ return [
     'ghosted_rejected' => 'Ghosting/Odrzucono',
 
     // Statistics
-    'total_applications' => 'Aplikacje Łącznie',
+    'total_applications' => 'Aplikacje łącznie',
     'today' => ' Dziś',
     'last_7_days' => 'Ostatnie 7 dni',
-    'applications_by_status' => 'Aplikacje wg Statusu',
+    'applications_by_status' => 'Aplikacje według Statusu',
+    'application_status_flow' => 'Przepływ Statusów Aplikacji',
 
     // Helper texts
     'max_characters' => 'Maksymalnie 60,000 znaków',
