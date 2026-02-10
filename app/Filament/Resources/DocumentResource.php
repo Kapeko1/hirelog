@@ -12,6 +12,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 
 class DocumentResource extends Resource
@@ -49,16 +50,17 @@ class DocumentResource extends Resource
                     $query->where('user_id', auth()->id());
                 })->get();
 
+                $disk = Storage::disk(config('documents.disk'));
                 $totalSize = 0;
                 foreach ($documents as $document) {
-                    if ($document->file_path && file_exists(storage_path('app/private/'.$document->file_path))) {
-                        $totalSize += filesize(storage_path('app/private/'.$document->file_path));
+                    if ($document->file_path && $disk->exists($document->file_path)) {
+                        $totalSize += $disk->size($document->file_path);
                     }
                 }
 
                 $usedMB = round($totalSize / 1024 / 1024, 2);
-                $maxMB = 15;
-                $percentage = round(($totalSize / (15 * 1024 * 1024)) * 100, 1);
+                $maxMB = config('documents.user_quota_mb');
+                $percentage = round(($totalSize / ($maxMB * 1024 * 1024)) * 100, 1);
 
                 return new HtmlString('
                     <div x-data="{
@@ -186,10 +188,9 @@ class DocumentResource extends Resource
                 TextColumn::make('file_size')
                     ->label(__('app.size'))
                     ->getStateUsing(function ($record) {
-                        if ($record->file_path && file_exists(storage_path('app/private/'.
-                                $record->file_path))) {
-                            return number_format(filesize(storage_path('app/private/'.
-                                        $record->file_path)) / 1024 / 1024, 2).' MB';
+                        $disk = Storage::disk(config('documents.disk'));
+                        if ($record->file_path && $disk->exists($record->file_path)) {
+                            return number_format($disk->size($record->file_path) / 1024 / 1024, 2).' MB';
                         }
 
                         return __('app.unknown_size');

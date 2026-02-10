@@ -36,8 +36,9 @@ class Document extends Model
         parent::boot();
 
         static::deleted(function ($document) {
-            if ($document->file_path && Storage::disk('local')->exists($document->file_path)) {
-                Storage::disk('local')->delete($document->file_path);
+            $disk = Storage::disk(config('documents.disk'));
+            if ($document->file_path && $disk->exists($document->file_path)) {
+                $disk->delete($document->file_path);
             }
         });
     }
@@ -48,7 +49,7 @@ class Document extends Model
     public function getUrlAttribute()
     {
         if ($this->file_path) {
-            return Storage::url($this->file_path);
+            return Storage::disk(config('documents.disk'))->url($this->file_path);
         }
 
         return null;

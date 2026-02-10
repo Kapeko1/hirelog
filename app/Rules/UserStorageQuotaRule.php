@@ -12,8 +12,9 @@ class UserStorageQuotaRule implements ValidationRule
 {
     public int $maxQuotaBytes;
 
-    public function __construct(int $maxQuotaMB = 15)
+    public function __construct(?int $maxQuotaMB = null)
     {
+        $maxQuotaMB = $maxQuotaMB ?? config('documents.user_quota_mb', 100);
         $this->maxQuotaBytes = $maxQuotaMB * 1024 * 1024;
     }
 
@@ -33,11 +34,13 @@ class UserStorageQuotaRule implements ValidationRule
             return;
         }
 
+        $disk = Storage::disk(config('documents.disk'));
+
         $currentUsage = Document::whereHas('documentable', function ($query) use ($user) {
             $query->where('user_id', $user->id);
-        })->get()->sum(function ($document) {
-            return Storage::disk('local')->exists($document->file_path)
-                ? Storage::disk('local')->size($document->file_path)
+        })->get()->sum(function ($document) use ($disk) {
+            return $disk->exists($document->file_path)
+                ? $disk->size($document->file_path)
                 : 0;
         });
 
@@ -46,7 +49,8 @@ class UserStorageQuotaRule implements ValidationRule
         if (($currentUsage + $newFileSize) > $this->maxQuotaBytes) {
             $remaining = max(0, $this->maxQuotaBytes - $currentUsage);
             $remainingMB = round($remaining / 1024 / 1024, 2);
-            $fail("Przekroczono limit miejsca (15MB). Pozostało: {$remainingMB}MB");
+            $maxQuotaMB = round($this->maxQuotaBytes / 1024 / 1024);
+            $fail("Przekroczono limit miejsca ({$maxQuotaMB}MB). Pozostało: {$remainingMB}MB");
         }
     }
 }

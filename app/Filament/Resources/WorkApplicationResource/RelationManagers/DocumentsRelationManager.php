@@ -35,16 +35,16 @@ class DocumentsRelationManager extends RelationManager
             ->components([
                 FileUpload::make('file_path')
                     ->label(__('app.pdf_file'))
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->directory('work-application-documents/'.date('Y/m'))
-                    ->disk('local')
-                    ->visibility('private')
-                    ->maxSize(8192)
+                    ->acceptedFileTypes(config('documents.accepted_file_types'))
+                    ->directory(config('documents.directory').'/'.date('Y/m'))
+                    ->disk(config('documents.disk'))
+                    ->visibility(config('documents.visibility'))
+                    ->maxSize(config('documents.max_file_size'))
                     ->helperText(__('app.max_file_size'))
                     ->storeFileNamesIn('file_name')
                     ->rules([
                         new UserStorageQuotaRule,
-                        'max:8192',
+                        'max:'.config('documents.max_file_size'),
                     ])
                     ->validationMessages([
                         'max' => __('app.file_too_large'),

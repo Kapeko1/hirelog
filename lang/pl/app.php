@@ -66,4 +66,9 @@ return [
 
     // Record titles
     'note_record' => 'notatkę',
+
+    // Document errors
+    'document_access_denied' => 'Brak dostępu do tego dokumentu.',
+    'document_not_available' => 'Dokument nie jest już dostępny.',
+    'file_not_found' => 'Plik nie znaleziony.',
 ];
