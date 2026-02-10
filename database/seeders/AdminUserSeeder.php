@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        User::create([
             'name' => 'Kacper',
             'email' => 'kacper.gadek2@wp.pl',
             'is_admin' => true,
