@@ -34,10 +34,10 @@ enum ApplicationStatus: string implements HasLabel, HasColor
             self::Applied => 'gray',
             self::Verification => 'info',
             self::Interview => 'warning',
-            self::Offer => 'success',
+            self::Offer => 'teal',
             self::Hired => 'success',
             self::Rejected => 'danger',
-            self::Ghosted => 'gray',
+            self::Ghosted => 'slate',
         };
     }
 }
