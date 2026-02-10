@@ -39,7 +39,7 @@ class WorkApplicationResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('app.applications');
+        return __('app.application');
     }
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';

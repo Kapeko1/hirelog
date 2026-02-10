@@ -3,7 +3,9 @@
 return [
     // Navigation & General
     'applications' => 'Applications',
+    'application' => 'application',
     'documents' => 'Documents',
+    'document' => 'document',
     'notes' => 'Notes',
 
     // Form Fields
@@ -66,4 +68,10 @@ return [
 
     // Record titles
     'note_record' => 'note',
+
+    // Document errors
+    'document_access_denied' => 'Access to this document is denied.',
+    'document_not_available' => 'The document is no longer available.',
+    'file_not_found' => 'File not found.',
+    'storage_quota_exceeded' => 'Storage quota exceeded (:quota MB). Remaining: :remaining MB',
 ];

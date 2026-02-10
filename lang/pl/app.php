@@ -3,7 +3,9 @@
 return [
     // Navigation & General
     'applications' => 'Aplikacje',
+    'application' => 'aplikacja',
     'documents' => 'Dokumenty',
+    'document' => 'dokument',
     'notes' => 'Notatki',
 
     // Form Fields

@@ -28,6 +28,11 @@ class DocumentResource extends Resource
         return __('app.documents');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('app.document');
+    }
+
     public static function getPluralModelLabel(): string
     {
         return __('app.documents');
