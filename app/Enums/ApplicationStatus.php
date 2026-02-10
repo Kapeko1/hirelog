@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
+use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ApplicationStatus: string implements HasLabel
+enum ApplicationStatus: string implements HasLabel, HasColor
 {
     case Applied = 'Applied';
     case Verification = 'Verification';
@@ -24,6 +25,19 @@ enum ApplicationStatus: string implements HasLabel
             self::Rejected => __('statuses.rejected'),
             self::Hired => __('statuses.hired'),
             self::Ghosted => __('statuses.ghosted'),
+        };
+    }
+
+    public function getColor(): string|array|null
+    {
+        return match ($this) {
+            self::Applied => 'gray',
+            self::Verification => 'info',
+            self::Interview => 'warning',
+            self::Offer => 'success',
+            self::Hired => 'success',
+            self::Rejected => 'danger',
+            self::Ghosted => 'gray',
         };
     }
 }

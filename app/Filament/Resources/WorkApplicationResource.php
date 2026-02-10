@@ -102,15 +102,7 @@ class WorkApplicationResource extends Resource
                 TextColumn::make('status')
                     ->label(__('app.status'))
                     ->badge()
-                    ->color(fn (ApplicationStatus $state): string => match ($state) {
-                        ApplicationStatus::Applied => 'gray',
-                        ApplicationStatus::Verification => 'info',
-                        ApplicationStatus::Interview => 'warning',
-                        ApplicationStatus::Offer => 'success',
-                        ApplicationStatus::Hired => 'success',
-                        ApplicationStatus::Rejected => 'danger',
-                        ApplicationStatus::Ghosted => 'gray',
-                    })
+                    ->color(fn (ApplicationStatus $state) => $state->getColor())
                     ->searchable(),
 
                 TextColumn::make('location')
