@@ -73,7 +73,8 @@ class ApplicationStatusHistoriesTable
             ->defaultSort('changed_at', 'desc')
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->modalHeading(),
                 ]),
             ]);
     }

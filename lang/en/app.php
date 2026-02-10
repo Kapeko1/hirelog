@@ -85,4 +85,5 @@ return [
     'initial' => 'Initial',
     'leave_empty_for_initial_status' => 'Leave empty for initial status',
     'updated_at' => 'Updated At',
+    'confirm_bulk_delete' => 'Are you sure you want to delete the selected items?',
 ];
