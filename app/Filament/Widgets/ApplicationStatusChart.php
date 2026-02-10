@@ -20,6 +20,11 @@ class ApplicationStatusChart extends ChartWidget
 
     protected int|string|array $columnSpan = 1;
 
+    public static function canView(): bool
+    {
+        return WorkApplication::where('user_id', auth()->id())->exists();
+    }
+
     protected function getData(): array
     {
         $userId = auth()->id();

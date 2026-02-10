@@ -3,12 +3,18 @@
 namespace App\Filament\Resources\WorkApplicationResource\Widgets;
 
 use App\Models\ApplicationStatusHistory;
+use App\Models\WorkApplication;
 use Elemind\FilamentECharts\Widgets\EChartWidget;
 use Illuminate\Support\Facades\DB;
 
 class ApplicationFlowSankeyChart extends EChartWidget
 {
     protected int|string|array $columnSpan = 'full';
+
+    public static function canView(): bool
+    {
+        return WorkApplication::where('user_id', auth()->id())->exists();
+    }
 
     public function getHeading(): string
     {
