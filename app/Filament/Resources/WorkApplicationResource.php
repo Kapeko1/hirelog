@@ -119,12 +119,15 @@ class WorkApplicationResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->modalHeading(__('app.confirm_bulk_delete'))
+                    ->modalDescription(''),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->modalHeading(),
+                        ->modalHeading(__('app.confirm_bulk_delete'))
+                        ->modalDescription(''),
                 ]),
             ]);
     }
