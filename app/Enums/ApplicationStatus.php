@@ -40,4 +40,17 @@ enum ApplicationStatus: string implements HasLabel, HasColor
             self::Ghosted => 'stone',
         };
     }
+
+    public function getHexColor(): string
+    {
+        return match ($this) {
+            self::Applied => '#9CA3AF',
+            self::Verification => '#60A5FA',
+            self::Interview => '#FBBF24',
+            self::Offer => '#34D399',
+            self::Hired => '#10B981',
+            self::Rejected => '#F87171',
+            self::Ghosted => '#6B7280',
+        };
+    }
 }

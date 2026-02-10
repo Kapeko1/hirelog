@@ -13,7 +13,9 @@ class ApplicationFlowSankeyChart extends EChartWidget
 
     public static function canView(): bool
     {
-        return WorkApplication::where('user_id', auth()->id())->exists();
+        return ApplicationStatusHistory::whereHas('workApplication', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->exists();
     }
 
     public function getHeading(): string

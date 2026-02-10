@@ -123,7 +123,8 @@ class WorkApplicationResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->modalHeading(),
                 ]),
             ]);
     }

@@ -41,17 +41,7 @@ class ApplicationStatusChart extends ChartWidget
             $statusEnum = $item->status;
 
             $labels[] = $statusEnum->getLabel();
-
-            $colors[] = match ($statusEnum) {
-                ApplicationStatus::Applied => '#9CA3AF',
-                ApplicationStatus::Verification => '#60A5FA',
-                ApplicationStatus::Interview => '#FBBF24',
-                ApplicationStatus::Offer => '#34D399',
-                ApplicationStatus::Hired => '#10B981',
-                ApplicationStatus::Rejected => '#F87171',
-                ApplicationStatus::Ghosted => '#6B7280',
-            };
-
+            $colors[] = $statusEnum->getHexColor();
             $data[] = $item->getAttribute('count');
         }
 

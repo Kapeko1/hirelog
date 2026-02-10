@@ -85,4 +85,5 @@ return [
     'initial' => 'Początkowy',
     'leave_empty_for_initial_status' => 'Pozostaw puste dla początkowego statusu',
     'updated_at' => 'Zaktualizowano',
+    'confirm_bulk_delete' => 'Czy na pewno chcesz usunąć zaznaczone?',
 ];

@@ -75,7 +75,8 @@ class NotesRelationManager extends RelationManager
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->modalHeading(),
                 ]),
             ]);
     }
