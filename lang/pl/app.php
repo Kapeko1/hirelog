@@ -74,4 +74,14 @@ return [
     'document_not_available' => 'Dokument nie jest już dostępny.',
     'file_not_found' => 'Plik nie znaleziony.',
     'storage_quota_exceeded' => 'Przekroczono limit miejsca (:quota MB). Pozostało: :remaining MB',
+
+    // Status History
+    'status_history' => 'Historia Statusów',
+    'work_application' => 'Aplikacja',
+    'from_status' => 'Z Statusu',
+    'to_status' => 'Na Status',
+    'changed_at' => 'Data zmiany',
+    'initial' => 'Początkowy',
+    'leave_empty_for_initial_status' => 'Pozostaw puste dla początkowego statusu',
+    'updated_at' => 'Zaktualizowano',
 ];

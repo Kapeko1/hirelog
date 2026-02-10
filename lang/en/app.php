@@ -74,4 +74,14 @@ return [
     'document_not_available' => 'The document is no longer available.',
     'file_not_found' => 'File not found.',
     'storage_quota_exceeded' => 'Storage quota exceeded (:quota MB). Remaining: :remaining MB',
+
+    // Status History
+    'status_history' => 'Status History',
+    'work_application' => 'Application',
+    'from_status' => 'From Status',
+    'to_status' => 'To Status',
+    'changed_at' => 'Changed At',
+    'initial' => 'Initial',
+    'leave_empty_for_initial_status' => 'Leave empty for initial status',
+    'updated_at' => 'Updated At',
 ];
