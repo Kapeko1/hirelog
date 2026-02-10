@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\WorkApplication;
 use App\Observers\WorkApplicationObserver;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,5 +35,18 @@ class AppServiceProvider extends ServiceProvider
                     'en' => 'English',
                 ]);
         });
+        FilamentColor::register([
+            'danger' => Color::Red,
+            'zinc' => Color::Zinc,
+            'blue' => Color::Blue,
+            'amber' => Color::Amber,
+            'green' => Color::Green,
+            'slate' => Color::Slate,
+            'fuchsia' => Color::Fuchsia,
+            'stone' => Color::Stone,
+            'lime'=> Color::Lime,
+            'cyan' => Color::Cyan,
+            'rose'=> Color::Rose,
+        ]);
     }
 }

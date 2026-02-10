@@ -31,13 +31,13 @@ enum ApplicationStatus: string implements HasLabel, HasColor
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::Applied => 'gray',
-            self::Verification => 'info',
+            self::Applied => 'info',
+            self::Verification => 'cyan',
             self::Interview => 'warning',
-            self::Offer => 'teal',
-            self::Hired => 'success',
-            self::Rejected => 'danger',
-            self::Ghosted => 'slate',
+            self::Offer => 'lime',
+            self::Hired => 'green',
+            self::Rejected => 'rose',
+            self::Ghosted => 'stone',
         };
     }
 }

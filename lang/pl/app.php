@@ -78,8 +78,8 @@ return [
     // Status History
     'status_history' => 'Historia Statusów',
     'work_application' => 'Aplikacja',
-    'from_status' => 'Z Statusu',
-    'to_status' => 'Na Status',
+    'from_status' => 'Ze statusu',
+    'to_status' => 'Na status',
     'changed_at' => 'Data zmiany',
     'initial' => 'Początkowy',
     'leave_empty_for_initial_status' => 'Pozostaw puste dla początkowego statusu',

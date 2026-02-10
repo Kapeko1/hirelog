@@ -22,9 +22,10 @@ class ApplicationStatusHistoriesTable
                     ->searchable()
                     ->sortable()
                     ->label(__('app.company_name')),
-                TextColumn::make('workApplication.position')
+                TextColumn::make('workApplication.job_name')
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
                     ->label(__('app.position')),
                 TextColumn::make('from_status')
                     ->badge()
@@ -38,6 +39,7 @@ class ApplicationStatusHistoriesTable
                 TextColumn::make('changed_at')
                     ->dateTime()
                     ->sortable()
+                    ->toggleable()
                     ->label(__('app.changed_at'))
                     ->default(now()),
                 TextColumn::make('created_at')
