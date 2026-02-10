@@ -71,4 +71,5 @@ return [
     'document_access_denied' => 'Brak dostępu do tego dokumentu.',
     'document_not_available' => 'Dokument nie jest już dostępny.',
     'file_not_found' => 'Plik nie znaleziony.',
+    'storage_quota_exceeded' => 'Przekroczono limit miejsca (:quota MB). Pozostało: :remaining MB',
 ];

@@ -50,7 +50,10 @@ class UserStorageQuotaRule implements ValidationRule
             $remaining = max(0, $this->maxQuotaBytes - $currentUsage);
             $remainingMB = round($remaining / 1024 / 1024, 2);
             $maxQuotaMB = round($this->maxQuotaBytes / 1024 / 1024);
-            $fail("Przekroczono limit miejsca ({$maxQuotaMB}MB). Pozostało: {$remainingMB}MB");
+            $fail(__('app.storage_quota_exceeded', [
+                'quota' => $maxQuotaMB,
+                'remaining' => $remainingMB,
+            ]));
         }
     }
 }
