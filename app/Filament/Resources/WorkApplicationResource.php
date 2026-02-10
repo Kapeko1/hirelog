@@ -28,7 +28,7 @@ class WorkApplicationResource extends Resource
     protected static ?string $model = WorkApplication::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     public static function getNavigationLabel(): string
     {
         return __('app.applications');
