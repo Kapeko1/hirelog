@@ -22,6 +22,7 @@ class ApplicationStatusHistoryForm
                     ->getOptionLabelFromRecordUsing(fn($record) => "{$record->company_name} - {$record->position}")
                     ->searchable(['company_name', 'position'])
                     ->required()
+                    ->disabled()
                     ->label(__('app.work_application')),
                 Select::make('from_status')
                     ->options(ApplicationStatus::class)

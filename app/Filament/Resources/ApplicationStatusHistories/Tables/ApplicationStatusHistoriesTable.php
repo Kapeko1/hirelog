@@ -58,7 +58,7 @@ class ApplicationStatusHistoriesTable
                     ->relationship('workApplication', 'company_name', fn($query) => $query->where('user_id', auth()->id()))
                     ->searchable()
                     ->preload()
-                    ->label(__('app.work_application')),
+                    ->label(__('app.company')),
                 SelectFilter::make('from_status')
                     ->options(ApplicationStatus::class)
                     ->label(__('app.from_status')),

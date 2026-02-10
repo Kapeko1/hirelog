@@ -29,7 +29,7 @@ class ApplicationStatusHistoryResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('app.status_history');
+        return __('app.status_history_plural');
     }
 
     public static function getModelLabel(): string
@@ -39,7 +39,7 @@ class ApplicationStatusHistoryResource extends Resource
 
     public static function getPluralModelLabel(): string
     {
-        return __('app.status_history');
+        return __('app.status_history_plural');
     }
 
     public static function form(Schema $schema): Schema

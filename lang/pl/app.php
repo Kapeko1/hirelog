@@ -76,7 +76,8 @@ return [
     'storage_quota_exceeded' => 'Przekroczono limit miejsca (:quota MB). Pozostało: :remaining MB',
 
     // Status History
-    'status_history' => 'Historia Statusów',
+    'status_history' => 'historię statusu',
+    'status_history_plural' => 'Historia Statusów',
     'work_application' => 'Aplikacja',
     'from_status' => 'Ze statusu',
     'to_status' => 'Na status',

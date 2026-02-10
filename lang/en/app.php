@@ -76,7 +76,8 @@ return [
     'storage_quota_exceeded' => 'Storage quota exceeded (:quota MB). Remaining: :remaining MB',
 
     // Status History
-    'status_history' => 'Status History',
+    'status_history' => 'status history',
+    'status_history_plural' => 'Status History',
     'work_application' => 'Application',
     'from_status' => 'From Status',
     'to_status' => 'To Status',
