@@ -85,7 +85,9 @@ class DocumentsRelationManager extends RelationManager
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->modalHeading(__('app.confirm_bulk_delete'))
+                    ->modalDescription(''),
                 Action::make('download')
                     ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')
@@ -95,7 +97,8 @@ class DocumentsRelationManager extends RelationManager
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->modalHeading(),
+                        ->modalHeading(__('app.confirm_bulk_delete'))
+                        ->modalDescription(''),
                 ]),
             ]);
     }

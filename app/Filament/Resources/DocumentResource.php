@@ -206,7 +206,9 @@ class DocumentResource extends Resource
                 //
             ])
             ->recordActions([
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->modalHeading(__('app.confirm_bulk_delete'))
+                    ->modalDescription(''),
                 Action::make('download')
                     ->label(__('app.download'))
                     ->icon('heroicon-o-arrow-down-tray')

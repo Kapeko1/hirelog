@@ -13,7 +13,9 @@ class EditWorkApplication extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->modalHeading(__('app.confirm_bulk_delete'))
+                ->modalDescription(''),
         ];
     }
 }
