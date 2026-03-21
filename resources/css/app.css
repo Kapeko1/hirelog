@@ -11,3 +11,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@variant dark (&:where(.dark, .dark *));
+
+/* Smooth scroll for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add offset for fixed navbar when scrolling to anchors */
+section[id] {
+    scroll-margin-top: 5rem;
+}
