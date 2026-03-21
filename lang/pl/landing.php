@@ -50,6 +50,10 @@ return [
         'why_text' => 'HireLog powstał z mojego własnego doświadczenia w poszukiwaniu pracy. Rynek - szczególnie IT - jest teraz wyjątkowo trudny i pamiętam jak sam wysyłałem po 100 CV miesięcznie w poszukiwaniu pierwszej pracy. Aplikacje dublowały się, ja gubiłem się w ustaleniach i detalach. Excel do śledzenia zmianwydawał mi się nudny, a skoro jestem deweloperem to postanowiłem sam stworzyć narzędzie dla siebie. Zawsze pod ręką, dostępne z każdego urządzenia.',
         'mission' => 'Szukasz pracy? Może tak jak ja wcześniej, gubisz się we wszystkich aplikacjiach? Daj szansę HireLog, może pomoże Ci się w tym wszystkim ogarnąć.',
     ],
+    'feedback' => [
+        'section_title' => 'Twój feedback jest dla mnie cenny',
+        'description' => 'HireLog powstał jako proste narzędzie dla mnie i są w nim rzeczy na których mi akurat zależało. Teraz chcę go rozwijać i będę wdzięczny za każdy feedback - co można ulepszyć, jakie funkcje dodać, co zmienić. Twoja opinia pomoże mi uczynić HireLog lepszym narzędziem dla wszystkich.',
+    ],
     'footer' => [
         'rights' => 'Wszystkie prawa zastrzeżone.',
         'built_with' => 'Zbudowane z Laravel, Filament & Livewire',

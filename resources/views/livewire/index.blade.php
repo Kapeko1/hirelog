@@ -231,6 +231,27 @@
         </div>
     </section>
 
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-900 transition-colors duration-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-zinc-800 dark:to-zinc-900 rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-amber-200 dark:border-amber-900/30" x-data="{ visible: false }" x-init="setTimeout(() => visible = true, 300)" x-show="visible" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl mb-6 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                        {{ __('landing.feedback.section_title') }}
+                    </h2>
+                    <p class="text-lg text-slate-600 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+                        {{ __('landing.feedback.description') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-slate-900 dark:bg-black text-slate-400 dark:text-zinc-600 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
         <div class="max-w-7xl mx-auto">

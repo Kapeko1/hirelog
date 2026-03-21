@@ -50,6 +50,10 @@ return [
         'why_text' => 'HireLog was born from my own experience job hunting. The job market - especially in IT - is particularly tough right now, and I remember sending around 100 CVs a month when looking for my first job. Applications were duplicating, I was getting lost in arrangements and details. Excel for tracking changes seemed boring to me, and since I\'m a developer, I decided to create a tool for myself. Always at hand, accessible from any device.',
         'mission' => 'Are you job hunting? Maybe like me before, you\'re getting lost in all the applications you\'ve submitted? Give HireLog a chance, it might help you get it all sorted out',
     ],
+    'feedback' => [
+        'section_title' => 'Your feedback is valuable to me',
+        'description' => 'HireLog was created as a simple tool for myself and it contains features that I personally needed. Now I want to develop it further and I would be grateful for any feedback - what can be improved, what features to add, what to change. Your opinion will help me make HireLog a better tool for everyone.',
+    ],
     'footer' => [
         'rights' => 'All rights reserved.',
     ],
