@@ -45,6 +45,8 @@ return [
         'author_title' => 'About me',
         'why_title' => 'About HireLog?',
         'author_text' => 'Hi! My name is Kacper Gądek and I\'m a developer. On a daily basis, I work on creating software, particularly backend-related tasks - database optimizations, data processing, reporting, integrations, and web application security.',
+        'connect_linkedin' => 'LinkedIn',
+        'email_me' => 'Email',
         'why_text' => 'HireLog was born from my own experience job hunting. The job market - especially in IT - is particularly tough right now, and I remember sending around 100 CVs a month when looking for my first job. Applications were duplicating, I was getting lost in arrangements and details. Excel for tracking changes seemed boring to me, and since I\'m a developer, I decided to create a tool for myself. Always at hand, accessible from any device.',
         'mission' => 'Are you job hunting? Maybe like me before, you\'re getting lost in all the applications you\'ve submitted? Give HireLog a chance, it might help you get it all sorted out',
     ],
