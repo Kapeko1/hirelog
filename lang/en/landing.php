@@ -16,7 +16,7 @@ return [
         'cta_learn_more' => 'Learn More',
     ],
     'stats' => [
-        'statuses' => 'Application Statuses',
+        'statuses' => 'Applications',
         'storage' => 'Document Storage',
         'visualizations' => 'Visualizations & Charts',
     ],

@@ -16,8 +16,8 @@ return [
         'cta_learn_more' => 'Dowiedz się więcej',
     ],
     'stats' => [
-        'statuses' => 'Statusów aplikacji',
-        'storage' => 'Przestrzeń na dokumenty',
+        'statuses' => 'Aplikacji',
+        'storage' => 'Przestrzeni na dokumenty',
         'visualizations' => 'Wizualizacji i wykresów',
     ],
     'features' => [

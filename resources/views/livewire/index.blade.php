@@ -88,7 +88,7 @@
                 <!-- Stats -->
                 <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto" x-data="{ visible: false }" x-init="setTimeout(() => visible = true, 500)">
                     <div x-show="visible" x-transition:enter="transition ease-out duration-700 delay-100" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" class="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-xl border border-slate-100 dark:border-zinc-800">
-                        <div class="text-4xl font-bold bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent mb-2">7</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent mb-2">∞</div>
                         <div class="text-slate-600 dark:text-zinc-400 font-medium">{{ __('landing.stats.statuses') }}</div>
                     </div>
                     <div x-show="visible" x-transition:enter="transition ease-out duration-700 delay-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" class="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-xl border border-slate-100 dark:border-zinc-800">
