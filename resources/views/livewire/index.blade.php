@@ -51,10 +51,10 @@
                     </div>
 
                     <!-- Auth Links -->
-                    <a href="/admin/login" class="text-slate-600 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors px-4 py-2 rounded-lg hover:bg-amber-50 dark:hover:bg-zinc-800">
+                    <a href="/login" class="text-slate-600 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors px-4 py-2 rounded-lg hover:bg-amber-50 dark:hover:bg-zinc-800">
                         {{ __('landing.nav.login') }}
                     </a>
-                    <a href="/admin/register" class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40">
+                    <a href="/register" class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40">
                         {{ __('landing.nav.register') }}
                     </a>
                 </div>
@@ -78,7 +78,7 @@
                         {{ __('landing.hero.subtitle') }}
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="/admin/register" class="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-bold text-lg shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/60 hover:from-amber-600 hover:to-amber-700 transition-all duration-300 transform hover:-translate-y-1">
+                        <a href="/register" class="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-bold text-lg shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/60 hover:from-amber-600 hover:to-amber-700 transition-all duration-300 transform hover:-translate-y-1">
                             <span class="relative z-10">{{ __('landing.hero.cta_register') }}</span>
                             <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
                         </a>

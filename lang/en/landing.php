@@ -43,7 +43,7 @@ return [
     'about' => [
         'section_title' => '',
         'author_title' => 'About me',
-        'why_title' => 'About HireLog?',
+        'why_title' => 'About HireLog',
         'author_text' => 'Hi! My name is Kacper Gądek and I\'m a developer. On a daily basis, I work on creating software, particularly backend-related tasks - database optimizations, data processing, reporting, integrations, and web application security.',
         'connect_linkedin' => 'LinkedIn',
         'email_me' => 'Email',
